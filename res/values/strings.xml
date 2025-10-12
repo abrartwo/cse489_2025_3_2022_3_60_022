@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">cse489_2025_3_2022_3_60_022</string>
+
+    <string name="placeholder">placeholder</string>
+
+    <!-- Titles -->
+    <string name="attendance">Attendance</string>
+    <string name="student_profile">Student Profile</string>
+
+    <!-- Buttons -->
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="add_student">Add Student</string>
+
+    <!-- List View Header -->
+    <string name="sid">SID</string>
+    <string name="student_name">Student Name</string>
+    <string name="p">P</string>
+    <string name="a">A</string>
+    <string name="stat">Stat</string>
+    <string name="email">Email</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="student_id">Student ID</string>
+</resources>
