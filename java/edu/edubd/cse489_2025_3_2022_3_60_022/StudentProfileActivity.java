@@ -1,10 +1,12 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,11 +49,10 @@ public class StudentProfileActivity extends AppCompatActivity {
         String studentEmail = etStudentEmail.getText().toString().trim();
         String phoneNumber = etStudentContactNumber.getText().toString().trim();
 
-        var verifier = Verifier.getInstance();
-        if (!verifier.verifyStudentId(this, studentId) ||
-                !verifier.verifyName(this, studentName) ||
-                !verifier.verifyEmail(this, studentEmail) ||
-                !verifier.verifyPhone(this, phoneNumber)) {
+        if (!verifyStudentId(this, studentId) ||
+                !verifyName(this, studentName) ||
+                !verifyEmail(this, studentEmail) ||
+                !verifyPhone(this, phoneNumber)) {
             return;
         }
 
@@ -59,5 +60,37 @@ public class StudentProfileActivity extends AppCompatActivity {
         System.out.println("Student Name  : " + studentName);
         System.out.println("Student Email : " + studentEmail);
         System.out.println("Student Phone : " + phoneNumber);
+    }
+
+    public boolean verifyStudentId(Context c, String studentId) {
+        // TODO: NOT IMPLEMENTED ;
+        return false;
+    }
+
+    public boolean verifyName(Context c, String studentName) {
+        // TODO: NOT IMPLEMENTED ;
+        return false;
+    }
+
+    public boolean verifyEmail(Context c, String email) {
+        if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}(?:\\.[A-Za-z]{2,})*$")) {
+            Toast.makeText(c, "Invalid Email Address", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    public boolean verifyPhone(Context c, String phone) {
+        // TODO: NOT IMPLEMENTED ;
+        return false;
+    }
+
+    public boolean verifyCourseCode(Context c, String courseCode) {
+        // TODO: NOT IMPLEMENTED ;
+        return false;
+    }
+
+    public boolean verifyDate(Context c, String date) {
+        // TODO: NOT IMPLEMENTED ;
+        return false;
     }
 }
