@@ -10,7 +10,7 @@
     <!-- Buttons -->
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-    <string name="edit">Edit</string>
+    <string name="exit">Exit</string>
     <string name="add_student">Add Student</string>
 
     <!-- List View Header -->

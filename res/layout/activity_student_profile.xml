@@ -48,29 +48,36 @@
                     android:textSize="14sp"
                     android:textStyle="bold"/>
                 <EditText
+                    android:id="@+id/etStudentID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="16dp"
+                    android:inputType="text"
+                    android:maxLength="13"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/student_name"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/ivStudentImg"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
 
         <EditText
+            android:id="@+id/etStudentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:inputType="textPersonName"
+            android:maxLength="40"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -79,9 +86,12 @@
             android:textSize="14sp"
             android:textStyle="bold"/>
         <EditText
+            android:id="@+id/etStudentEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:inputType="textEmailAddress"
+            android:maxLength="40"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -90,8 +100,11 @@
             android:textSize="14sp"
             android:textStyle="bold"/>
         <EditText
+            android:id="@+id/etStudentContactNumber"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:maxLength="17"/>
 
     </LinearLayout>
 
@@ -104,6 +117,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -114,6 +128,7 @@
             android:text="@string/cancel" />
 
         <Button
+            android:id="@+id/btnSave"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
