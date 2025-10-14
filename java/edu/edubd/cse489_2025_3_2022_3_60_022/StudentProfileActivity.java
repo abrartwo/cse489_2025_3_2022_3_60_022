@@ -7,10 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentProfileActivity extends AppCompatActivity {
+
     private EditText etStudentID, etStudentName, etStudentEmail, etStudentContactNumber;
     private ImageView ivStudentImg;
     private Button btnCancel, btnSave;
@@ -28,19 +28,23 @@ public class StudentProfileActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+        btnCancel.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
             }
-        });
+        );
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveProfile();
+        btnSave.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveProfile();
+                }
             }
-        });
+        );
     }
 
     private void saveProfile() {
@@ -49,10 +53,12 @@ public class StudentProfileActivity extends AppCompatActivity {
         String studentEmail = etStudentEmail.getText().toString().trim();
         String phoneNumber = etStudentContactNumber.getText().toString().trim();
 
-        if (!verifyStudentId(this, studentId) ||
-                !verifyName(this, studentName) ||
-                !verifyEmail(this, studentEmail) ||
-                !verifyPhone(this, phoneNumber)) {
+        if (
+            !verifyStudentId(this, studentId) ||
+            !verifyName(this, studentName) ||
+            !verifyEmail(this, studentEmail) ||
+            !verifyPhone(this, phoneNumber)
+        ) {
             return;
         }
 
@@ -63,29 +69,71 @@ public class StudentProfileActivity extends AppCompatActivity {
     }
 
     public boolean verifyStudentId(Context c, String studentId) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
+        var isValid = true;
+        String[] toks = studentId.split("-");
+
+        if (studentId.length() < 13) {
+            isValid = false;
+        } else if (toks.length != 4) {
+            isValid = false;
+        } else {
+            for (var tok : toks) {
+                try {
+                    Integer.parseInt(tok);
+                } catch (NumberFormatException nfe) {
+                    isValid = false;
+                }
+            }
+        }
+
+        if (!isValid) {
+            Toast.makeText(c, "Invalid Student ID", Toast.LENGTH_LONG).show();
+        }
+        return isValid;
     }
 
     public boolean verifyName(Context c, String studentName) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
+        var isValid = true;
+        if (studentName.length() < 2) {
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     public boolean verifyEmail(Context c, String email) {
-        if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}(?:\\.[A-Za-z]{2,})*$")) {
-            Toast.makeText(c, "Invalid Email Address", Toast.LENGTH_LONG).show();
+        var isValid = email.matches(
+            "^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\\.[A-Za-z0-9-]+)*\\.[A-Za-z]{2,}$"
+        );
+        if (!isValid) {
+            Toast.makeText(
+                c,
+                "Invalid Email Address",
+                Toast.LENGTH_LONG
+            ).show();
         }
-        return false;
+        return isValid;
     }
 
     public boolean verifyPhone(Context c, String phone) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
+        if (phone.length < 10 || phone.length > 15) {
+            Toast.makeText(
+                c,
+                "Phone must be 10 or 11 char long",
+                Toast.LENGTH_LONG
+            ).show();
+        }
+        return true;
     }
 
     public boolean verifyCourseCode(Context c, String courseCode) {
-        // TODO: NOT IMPLEMENTED ;
+        if (courseCode.length() != 6 && courseCode.length() != 7) {
+            Toast.makeText(
+                c,
+                "Course code must be 6 or 7 char long",
+                Toast.LENGTH_LONG
+            ).show();
+        }
         return false;
     }
 

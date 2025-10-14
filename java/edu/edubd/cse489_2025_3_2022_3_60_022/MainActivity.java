@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
     private EditText etCourseCode, etDate;
     private Button btnExit, btnAddStudent;
     private ListView lvStudents;
@@ -25,23 +25,27 @@ public class MainActivity extends AppCompatActivity {
         btnAddStudent = findViewById(R.id.btnAddStudent);
         lvStudents = findViewById(R.id.lvStudents);
 
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+        btnExit.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
             }
-        });
+        );
 
-        btnAddStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(
-                        MainActivity.this,
-                        StudentProfileActivity.class)
-                );
+        btnAddStudent.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(
+                        new Intent(
+                            MainActivity.this,
+                            StudentProfileActivity.class
+                        )
+                    );
+                }
             }
-        });
+        );
     }
-
-
 }
