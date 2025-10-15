@@ -28,19 +28,23 @@ public class StudentProfileActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnCancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveProfile();
-            }
-        });
+        btnSave.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        saveProfile();
+                    }
+                }
+        );
     }
 
     private void saveProfile() {
@@ -65,34 +69,91 @@ public class StudentProfileActivity extends AppCompatActivity {
     }
 
     public boolean verifyStudentId(Context c, String studentId) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
+        if (studentId.isEmpty()) {
+            Toast.makeText(c, "Student ID is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        var isValid = true;
+        String[] tokens = studentId.split("-");
+
+        if (studentId.length() < 13) {
+            isValid = false;
+        } else if (tokens.length != 4) {
+            isValid = false;
+        } else {
+            for (var tok : tokens) {
+                try {
+                    Integer.parseInt(tok);
+                } catch (NumberFormatException nfe) {
+                    isValid = false;
+                }
+            }
+        }
+
+        if (!isValid) {
+            Toast.makeText(c, "Invalid Student ID", Toast.LENGTH_LONG).show();
+        }
+        return isValid;
     }
 
     public boolean verifyName(Context c, String studentName) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
+        if (studentName.isEmpty()) {
+            Toast.makeText(c, "Student name is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (studentName.length() < 2) {
+            Toast.makeText(c, "Name is too short. Born again and change your name.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (studentName.matches(".*\\d.*")) {
+            Toast.makeText(c, "You have a number on your name??????.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     public boolean verifyEmail(Context c, String email) {
-        if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}(?:\\.[A-Za-z]{2,})*$")) {
-            Toast.makeText(c, "Invalid Email Address", Toast.LENGTH_LONG).show();
+        if (email.isEmpty()) {
+            Toast.makeText(c, "Student Email is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        var isValid = true;
+        String[] tokens = email.split("@");
+
+        if (email.length() < 5) {
+            isValid = false;
+        } else if (tokens.length != 2) {
+            isValid = false;
+        } else if (tokens[1].split("\\.").length != 2) {
+            isValid = false;
+        }
+
+        if (!isValid) {
+            Toast.makeText(c, "Not an email", Toast.LENGTH_LONG).show();
         }
         return isValid;
     }
 
     public boolean verifyPhone(Context c, String phone) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
-    }
-
-    public boolean verifyCourseCode(Context c, String courseCode) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
-    }
-
-    public boolean verifyDate(Context c, String date) {
-        // TODO: NOT IMPLEMENTED ;
-        return false;
+        if (phone.isEmpty()) {
+            Toast.makeText(c, "Phone number is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (phone.length() < 10 || phone.length() > 20) {
+            Toast.makeText(
+                    c,
+                    "Phone must be under 10 to 20 char long",
+                    Toast.LENGTH_LONG
+            ).show();
+            return false;
+        } else if (phone.matches(".*[a-zA-Z].*")) {
+            Toast.makeText(
+                    c,
+                    "Phone can not contain alphabetic character.",
+                    Toast.LENGTH_LONG
+            ).show();
+            return false;
+        }
+        return true;
     }
 }
