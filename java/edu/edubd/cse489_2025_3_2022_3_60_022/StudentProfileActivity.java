@@ -44,7 +44,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     }
 
     private void saveProfile() {
-        var std = new StudentBuilder()
+        Student std = new StudentBuilder()
                 .addId(etStudentID.getText().toString().trim())
                 .addName(etStudentName.getText().toString().trim())
                 .addEmail(etStudentEmail.getText().toString().trim())

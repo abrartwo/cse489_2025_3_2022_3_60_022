@@ -26,27 +26,21 @@ public class MainActivity extends AppCompatActivity {
         btnAddStudent = findViewById(R.id.btnAddStudent);
         lvStudents = findViewById(R.id.lvStudents);
 
-        btnExit.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                         finish();
                     }
-                }
-        );
+        });
 
-        btnAddStudent.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(
-                                new Intent(
-                                        MainActivity.this,
-                                        StudentProfileActivity.class
-                                )
-                        );
-                    }
-                }
-        );
+        btnAddStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(
+                        MainActivity.this,
+                                StudentProfileActivity.class
+                        ));
+            }
+        });
     }
 }
