@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private EditText etCourseCode, etDate;
-    private Button btnExit, btnAddStudent;
+    //private Button btnExit, btnAddStudent;
     private ListView lvStudents;
 
     @Override
@@ -22,18 +22,16 @@ public class MainActivity extends AppCompatActivity {
 
         etCourseCode = findViewById(R.id.etCourseCode);
         etDate = findViewById(R.id.etDate);
-        btnExit = findViewById(R.id.btnExit);
-        btnAddStudent = findViewById(R.id.btnAddStudent);
         lvStudents = findViewById(R.id.lvStudents);
 
-        btnExit.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnExit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                         finish();
                     }
         });
 
-        btnAddStudent.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnAddStudent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(
