@@ -1,19 +1,23 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     private EditText etCourseCode, etDate;
-    //private Button btnExit, btnAddStudent;
     private ListView lvStudents;
+
+    private ActivityResultLauncher<Intent> studentProfileLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +28,41 @@ public class MainActivity extends AppCompatActivity {
         etDate = findViewById(R.id.etDate);
         lvStudents = findViewById(R.id.lvStudents);
 
+
         findViewById(R.id.btnExit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        finish();
-                    }
+                finish();
+            }
         });
 
         findViewById(R.id.btnAddStudent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(
-                        MainActivity.this,
-                        StudentProfileActivity.class
-                ));
+                studentProfileLauncher.launch(new Intent(MainActivity.this, StudentProfileActivity.class));
             }
         });
+
+        studentProfileLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            this::handleAddStudentResult
+        );
+    }
+
+    private void handleAddStudentResult(ActivityResult result) {
+        if (result.getResultCode() == Activity.RESULT_OK) {
+            Intent it = result.getData();
+            if (it == null) {
+                return;
+            }
+            var bundle = it.getExtras();
+            if (bundle == null) {
+                return;
+            }
+
+            Student std = (Student) bundle.getSerializable("EXTRA_STD");
+            // TODO: Save in a container.
+            Toast.makeText(this, "Student Saved", Toast.LENGTH_SHORT).show();
+        }
     }
 }
