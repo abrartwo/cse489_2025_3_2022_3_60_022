@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <!-- Title-->
+    <TextView
+        android:id="@+id/tvSignUpTitle"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/app_title_bg"
+        android:gravity="center"
+        android:text="@string/signup"
+        android:textColor="@color/app_title_fg"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="28dp" />
+
+    <TextView
+        android:id="@+id/tvUserIdSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/user_id"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/tvSignUpTitle"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/etUserIdSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:inputType="text"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/tvUserIdSignUp"
+        tools:layout_editor_absoluteX="9dp" />
+
+    <TextView
+        android:id="@+id/tvEmailSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/email"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/etUserIdSignUp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/etEmailSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:inputType="textEmailAddress"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailSignUp"
+        tools:layout_editor_absoluteX="9dp" />
+
+    <TextView
+        android:id="@+id/tvPasswordSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/password"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/etEmailSignUp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/etPasswordSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/tvPasswordSignUp"
+        tools:layout_editor_absoluteX="9dp" />
+
+    <TextView
+        android:id="@+id/tvRetypePasswordSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/retype_password"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/etPasswordSignUp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/etRetypePasswordSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/tvRetypePasswordSignUp"
+        tools:layout_editor_absoluteX="9dp" />
+
+    <CheckBox
+        android:id="@+id/cbRememberUserSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/remember_user"
+        app:layout_constraintTop_toBottomOf="@id/etRetypePasswordSignUp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <CheckBox
+        android:id="@+id/cbRememberLoginSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/remember_login"
+        app:layout_constraintTop_toBottomOf="@id/cbRememberUserSignUp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/btnHaveAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_acc"
+        android:backgroundTint="@color/app_bg"
+        android:textColor="@color/app_fg"
+        app:layout_constraintBottom_toTopOf="@id/llBottomButtonsSignUp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbRememberLoginSignUp" />
+
+    <LinearLayout
+        android:id="@+id/llBottomButtonsSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="10dp">
+
+        <Button
+            android:id="@+id/btnExitSignUp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/app_title_bg"
+            android:text="@string/exit"
+            android:textColor="@color/app_title_fg" />
+
+        <Button
+            android:id="@+id/btnSignUpGo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/app_title_bg"
+            android:text="@string/loginGo"
+            android:textColor="@color/app_title_fg" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

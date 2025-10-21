@@ -6,12 +6,16 @@
     <!-- Titles -->
     <string name="attendance">Attendance</string>
     <string name="student_profile">Student Profile</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
 
     <!-- Buttons -->
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="exit">Exit</string>
     <string name="add_student">Add Student</string>
+    <string name="loginGo">Login//Go</string>
+    <string name="SignGo">SignUp//Go</string>
 
     <!-- List View Header -->
     <string name="sid">SID</string>
@@ -22,4 +26,16 @@
     <string name="email">Email</string>
     <string name="contact_number">Contact Number</string>
     <string name="student_id">Student ID</string>
+
+    <!-- Extra -->
+    <string name="user_id">User ID</string>
+    <string name="password">Password</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="remember_user">Remember User</string>
+    <string name="remember_password">Remember Password</string>
+    <string name="remember_login">Remember Login</string>
+    <string name="dont_have_acc">Don\'t have Account</string>
+    <string name="already_have_acc">Already have Account</string>
+
+
 </resources>

@@ -2,17 +2,12 @@ package edu.edubd.cse489_2025_3_2022_3_60_022;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentProfileActivity extends AppCompatActivity {
@@ -56,18 +51,14 @@ public class StudentProfileActivity extends AppCompatActivity {
             .addPhone(etStudentContactNumber.getText().toString().trim())
             .build();
 
-        if (!std.validateAllIfNotThenDo(
-            new Validator.ThenDoEvent() {
-                @Override
-                public void callback(String info) {
+        if (!std.validateStudentIfNotThenDo((info) -> {
                     Toast.makeText(StudentProfileActivity.this, info, Toast.LENGTH_SHORT).show();
-                }
             })) {
             return;
         }
 
         Intent intent = new Intent();
-        var b = new Bundle();
+        Bundle b = new Bundle();
         b.putSerializable("EXTRA_STD", std);
         intent.putExtras(b);
         setResult(Activity.RESULT_OK, intent);

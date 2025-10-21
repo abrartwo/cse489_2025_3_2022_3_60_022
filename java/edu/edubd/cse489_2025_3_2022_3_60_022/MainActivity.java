@@ -28,41 +28,32 @@ public class MainActivity extends AppCompatActivity {
         etDate = findViewById(R.id.etDate);
         lvStudents = findViewById(R.id.lvStudents);
 
-
-        findViewById(R.id.btnExit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        findViewById(R.id.btnExit).setOnClickListener((v) -> {
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
         });
 
-        findViewById(R.id.btnAddStudent).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.btnAddStudent).setOnClickListener((v) -> {
                 studentProfileLauncher.launch(new Intent(MainActivity.this, StudentProfileActivity.class));
-            }
         });
 
         studentProfileLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            this::handleAddStudentResult
+            (result) ->{
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent it = result.getData();
+                    if (it == null) {
+                        return;
+                    }
+                    Bundle bundle = it.getExtras();
+                    if (bundle == null) {
+                        return;
+                    }
+
+                    Student std = (Student) bundle.getSerializable("EXTRA_STD");
+                    // TODO: Save in a container.
+                    Toast.makeText(this, "Student Saved", Toast.LENGTH_SHORT).show();
+                }
+            }
         );
-    }
-
-    private void handleAddStudentResult(ActivityResult result) {
-        if (result.getResultCode() == Activity.RESULT_OK) {
-            Intent it = result.getData();
-            if (it == null) {
-                return;
-            }
-            var bundle = it.getExtras();
-            if (bundle == null) {
-                return;
-            }
-
-            Student std = (Student) bundle.getSerializable("EXTRA_STD");
-            // TODO: Save in a container.
-            Toast.makeText(this, "Student Saved", Toast.LENGTH_SHORT).show();
-        }
     }
 }

@@ -1,12 +1,14 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
+import org.jetbrains.annotations.NotNull;
+
 public abstract class Validator {
     public static boolean validateStudentId(ThenDoEvent event, String studentId) {
         if (studentId.isEmpty()) {
             event.callback("Student ID is required");
             return false;
         }
-        var isValid = true;
+        boolean isValid = true;
         String[] tokens = studentId.split("-");
 
         if (studentId.length() < 13) {
@@ -14,7 +16,7 @@ public abstract class Validator {
         } else if (tokens.length != 4) {
             isValid = false;
         } else {
-            for (var tok : tokens) {
+            for (String tok : tokens) {
                 try {
                     Integer.parseInt(tok);
                 } catch (NumberFormatException nfe) {
@@ -50,7 +52,7 @@ public abstract class Validator {
             event.callback("Student Email is required");
             return false;
         }
-        var isValid = true;
+        boolean isValid = true;
         String[] tokens = email.split("@");
 
         if (email.length() < 5) {
@@ -82,7 +84,50 @@ public abstract class Validator {
         return true;
     }
 
-    public abstract boolean validateAllIfNotThenDo(ThenDoEvent event);
+    public static boolean validateUserId(ThenDoEvent event, String userID) {
+        return validateStudentId(event, userID);
+    }
+
+    public static boolean validatePassword(ThenDoEvent event, String password) {
+        if (password.isEmpty()) {
+            event.callback("Password is required");
+            return false;
+        }
+        if (password.length() < 8 || password.length() > 32) {
+            event.callback("Password is length must be under 8 to 32 char long");
+            return false;
+        }
+        class ReErr {
+            final String pattern;
+            final String errInfo;
+            public  ReErr(String pattern, String errInfo) {
+                this.pattern = pattern;
+                this.errInfo = errInfo;
+            }
+            public boolean matches(@NotNull String str) {
+                return str.matches(pattern);
+            }
+            @NotNull
+            public String getErrInfo() {
+                return errInfo;
+            }
+        };
+        ReErr[] reErrs = {
+            new ReErr("(?=.*[A-Z])", "Password must contain at least one uppercase letter"),
+            new ReErr("(?=.*[a-z])", "Password must contain at least one lowercase letter"),
+            new ReErr("(?=.*\\d)", "Password must contain at least one number"),
+            new ReErr("(?=.*[!@#$%^&*(),.?\":{}|<>])", "Password must contain at least one special character"),
+        };
+
+        for (ReErr i : reErrs) {
+            if (!i.matches(password)) {
+                event.callback(i.getErrInfo());
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public interface ThenDoEvent {
         void callback(String info);

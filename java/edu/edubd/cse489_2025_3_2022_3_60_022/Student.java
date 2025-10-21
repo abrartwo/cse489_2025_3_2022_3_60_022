@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 
-public class Student extends Validator implements Serializable {
+public class Student implements Serializable {
     private final String id, name, email, phoneNumber;
 
     public Student(@NonNull StudentBuilder b) {
@@ -17,7 +17,7 @@ public class Student extends Validator implements Serializable {
         this.phoneNumber = b.phoneNumber;
     }
 
-    public boolean validateAllIfNotThenDo(ThenDoEvent event) {
+    public boolean validateStudentIfNotThenDo(Validator.ThenDoEvent event) {
         if (!Validator.validateStudentId(event, this.id)) {
             return false;
         }
