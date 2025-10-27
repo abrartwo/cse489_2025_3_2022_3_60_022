@@ -22,6 +22,7 @@
     <string name="student_name">Student Name</string>
     <string name="p">P</string>
     <string name="a">A</string>
+    <string name="default_sid">0000-0-00-000</string>
     <string name="stat">Stat</string>
     <string name="email">Email</string>
     <string name="contact_number">Contact Number</string>

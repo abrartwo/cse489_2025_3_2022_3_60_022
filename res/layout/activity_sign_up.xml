@@ -37,6 +37,7 @@
         android:layout_margin="10dp"
         android:inputType="text"
         android:textSize="25sp"
+        android:maxLength="12"
         app:layout_constraintTop_toBottomOf="@id/tvUserIdSignUp"
         tools:layout_editor_absoluteX="9dp" />
 
@@ -110,11 +111,11 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <CheckBox
-        android:id="@+id/cbRememberLoginSignUp"
+        android:id="@+id/cbRememberPasswordSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/remember_login"
+        android:text="@string/remember_password"
         app:layout_constraintTop_toBottomOf="@id/cbRememberUserSignUp"
         tools:layout_editor_absoluteX="16dp" />
 
@@ -122,13 +123,13 @@
         android:id="@+id/btnHaveAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/already_have_acc"
         android:backgroundTint="@color/app_bg"
+        android:text="@string/already_have_acc"
         android:textColor="@color/app_fg"
         app:layout_constraintBottom_toTopOf="@id/llBottomButtonsSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbRememberLoginSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/cbRememberPasswordSignUp" />
 
     <LinearLayout
         android:id="@+id/llBottomButtonsSignUp"
@@ -157,7 +158,7 @@
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
             android:backgroundTint="@color/app_title_bg"
-            android:text="@string/loginGo"
+            android:text="@string/SignGo"
             android:textColor="@color/app_title_fg" />
     </LinearLayout>
 

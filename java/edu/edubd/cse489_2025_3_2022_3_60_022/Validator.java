@@ -85,7 +85,19 @@ public abstract class Validator {
     }
 
     public static boolean validateUserId(ThenDoEvent event, String userID) {
-        return validateStudentId(event, userID);
+        if (userID.isEmpty()) {
+            event.callback("Password is required");
+            return false;
+        }
+        if (userID.length() < 4 || userID.length() > 12) {
+            event.callback("User ID is length must be under 8 to 32 char long");
+            return false;
+        }
+        if (!userID.matches("^[a-z]+$")) {
+            event.callback("User ID should only contain lowercase letters (a–z)");
+            return false;
+        }
+        return true;
     }
 
     public static boolean validatePassword(ThenDoEvent event, String password) {

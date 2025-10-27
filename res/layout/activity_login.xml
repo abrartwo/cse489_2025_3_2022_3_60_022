@@ -37,6 +37,7 @@
         android:layout_margin="10dp"
         android:inputType="text"
         android:textSize="25sp"
+        android:maxLength="12"
         app:layout_constraintTop_toBottomOf="@id/tvUserIdLogin"
         tools:layout_editor_absoluteX="9dp" />
 
