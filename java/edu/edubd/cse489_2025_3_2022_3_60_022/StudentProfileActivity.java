@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.Student;
+import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.StudentBuilder;
+
 public class StudentProfileActivity extends AppCompatActivity {
 
     private EditText etStudentID, etStudentName, etStudentEmail, etStudentContactNumber;

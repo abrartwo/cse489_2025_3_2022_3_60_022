@@ -1,32 +1,35 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.AccountCredentialManager;
+import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.Validator;
+
 public class SignUpActivity extends AppCompatActivity {
     EditText etUserIdSignUp, etEmailSignUp, etPasswordSignUp, etRetypePasswordSignUp;
     CheckBox cbRememberUserSignUp, cbRememberPasswordSignUp;
 
-    private SharedPreferences sp;
+    private AccountCredentialManager acm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sp = getSharedPreferences("signup_info", MODE_PRIVATE);
-        String storedUserid = sp.getString("USER_ID", "");
-        if (!storedUserid.equals("")) {
-            boolean storedPasswordRemember = sp.getBoolean("REMEMBER_PASSWORD", false);
-            if (storedPasswordRemember) {
+
+        acm = AccountCredentialManager.openSharedPreferences(this);
+
+        if (acm.isUserExists()) {
+            if (acm.isRememberPassword()) {
                 moveToMainActivity();
             } else {
-                String storedPassword = sp.getString("PASSWORD", "");
-                boolean storedUserRemember = sp.getBoolean("REMEMBER_USER", false);
+                String storedUserid = acm.getUserId();
+                String storedPassword = acm.getPassword();
+                boolean storedUserRemember = acm.isRememberUser();
                 moveToLoginActivity(storedUserid, storedPassword, storedUserRemember);
             }
             finishAffinity();
@@ -42,15 +45,15 @@ public class SignUpActivity extends AppCompatActivity {
         cbRememberUserSignUp = findViewById(R.id.cbRememberUserSignUp);
         cbRememberPasswordSignUp = findViewById(R.id.cbRememberPasswordSignUp);
 
-        findViewById(R.id.btnHaveAcc).setOnClickListener(v -> {
-            moveToLoginActivity("", "", false);
-        });
-        findViewById(R.id.btnExitSignUp).setOnClickListener(v -> {
-            finish();
-        });
-        findViewById(R.id.btnSignUpGo).setOnClickListener(v -> {
-            processSignUp();
-        });
+        findViewById(R.id.btnHaveAcc).setOnClickListener(v ->
+            moveToLoginActivity("", "", false)
+        );
+        findViewById(R.id.btnExitSignUp).setOnClickListener(v ->
+            finish()
+        );
+        findViewById(R.id.btnSignUpGo).setOnClickListener(v ->
+            processSignUp()
+        );
     }
 
     private void processSignUp() {
@@ -63,7 +66,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         Validator.ThenDoEvent event = (info) -> Toast.makeText(SignUpActivity.this, info, Toast.LENGTH_LONG).show();
 
-        if (!Validator.validateUserId(event, userId) || !Validator.validateEmail(event, email) || !Validator.validatePassword(event, password)) {
+        if (!Validator.validateUserId(event, userId) ||
+            !Validator.validateEmail(event, email) ||
+            !Validator.validatePassword(event, password)) {
             return;
         }
         if (!password.equals(RetypePassword)) {
@@ -71,12 +76,11 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        SharedPreferences.Editor ed = sp.edit();
-        ed.putString("USER_ID", userId);
-        ed.putString("PASSWORD", password);
-        ed.putBoolean("REMEMBER_USER", isRememberUser);
-        ed.putBoolean("REMEMBER_PASSWORD", isRememberPassword);
-        ed.apply();
+        acm.newEditor()
+            .updateUserId(userId)
+            .updatePassword(password)
+            .updateRememberUser(isRememberUser)
+            .updateRememberPassword(isRememberPassword).apply();
 
         moveToMainActivity();
     }
