@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.AccountCredentialManager;
 import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.Validator;
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,10 +18,14 @@ public class LoginActivity extends AppCompatActivity {
     String userId, password;
     boolean rememberUser;
 
+    private AccountCredentialManager acm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        acm = AccountCredentialManager.openSharedPreferences(this);
 
         Intent i = getIntent();
         etUserIdLogin = findViewById(R.id.etUserIdLogin);
@@ -63,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
             event.callback("Invalid username or password");
             return;
         }
-        SharedPreferences.Editor sped = getSharedPreferences("signup_info", MODE_PRIVATE).edit();
-        sped.putString("USER_ID", userId);
-        sped.putString("PASSWORD", password);
-        sped.putBoolean("REMEMBER_USER", isRememberUser);
-        sped.putBoolean("REMEMBER_PASSWORD", isRememberPassword);
-        sped.apply();
+
+        acm.newEditor()
+                .updateUserId(userId)
+                .updatePassword(password)
+                .updateRememberUser(isRememberUser)
+                .updateRememberPassword(isRememberPassword).apply();
         finishAffinity();
     }
 }
