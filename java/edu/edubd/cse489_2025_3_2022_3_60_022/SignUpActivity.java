@@ -67,8 +67,8 @@ public class SignUpActivity extends AppCompatActivity {
         Validator.ThenDoEvent event = (info) -> Toast.makeText(SignUpActivity.this, info, Toast.LENGTH_LONG).show();
 
         if (!Validator.validateUserId(event, userId) ||
-            !Validator.validateEmail(event, email) ||
-            !Validator.validatePassword(event, password)) {
+                !Validator.validateEmail(event, email) ||
+                !Validator.validatePassword(event, password)) {
             return;
         }
         if (!password.equals(RetypePassword)) {
@@ -90,10 +90,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void moveToLoginActivity(String userid, String password, boolean rememberUser) {
-        Intent i = new Intent(this, LoginActivity.class);
-        i.putExtra("USER_ID", userid);
-        i.putExtra("PASSWORD", password);
-        i.putExtra("REMEMBER_USER", rememberUser);
-        startActivity(i);
+        startActivity(
+            new Intent(this, LoginActivity.class)
+                .putExtra("USER_ID", userid)
+                .putExtra("PASSWORD", password)
+                .putExtra("REMEMBER_USER", rememberUser)
+        );
     }
 }

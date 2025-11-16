@@ -47,11 +47,11 @@ public class KeyValueDB extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor execute(String query) {
+    public Cursor execute(String query, String[] args) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = null;
         try {
-            res = db.rawQuery(query, null);
+            res = db.rawQuery(query, args);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
     <!-- Title-->
@@ -16,128 +16,102 @@
         android:text="@string/signup"
         android:textColor="@color/app_title_fg"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="28dp" />
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvUserIdSignUp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/user_id"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/tvSignUpTitle"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etUserIdSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="text"
-        android:textSize="25sp"
-        android:maxLength="13"
-        app:layout_constraintTop_toBottomOf="@id/tvUserIdSignUp"
-        tools:layout_editor_absoluteX="9dp" />
+        <TextView
+            android:id="@+id/tvUserIdSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_id"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvEmailSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/email"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/etUserIdSignUp"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etUserIdSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLength="12"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/etEmailSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="textEmailAddress"
-        android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@id/tvEmailSignUp"
-        tools:layout_editor_absoluteX="9dp" />
+        <TextView
+            android:id="@+id/tvEmailSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvPasswordSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/password"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/etEmailSignUp"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etEmailSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/etPasswordSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="textPassword"
-        android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@id/tvPasswordSignUp"
-        tools:layout_editor_absoluteX="9dp" />
+        <TextView
+            android:id="@+id/tvPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvRetypePasswordSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/retype_password"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/etPasswordSignUp"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/etRetypePasswordSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="textPassword"
-        android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@id/tvRetypePasswordSignUp"
-        tools:layout_editor_absoluteX="9dp" />
+        <TextView
+            android:id="@+id/tvRetypePasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/retype_password"
+            android:textSize="16sp" />
 
-    <CheckBox
-        android:id="@+id/cbRememberUserSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/remember_user"
-        app:layout_constraintTop_toBottomOf="@id/etRetypePasswordSignUp"
-        tools:layout_editor_absoluteX="16dp" />
+        <EditText
+            android:id="@+id/etRetypePasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
 
-    <CheckBox
-        android:id="@+id/cbRememberPasswordSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/remember_password"
-        app:layout_constraintTop_toBottomOf="@id/cbRememberUserSignUp"
-        tools:layout_editor_absoluteX="16dp" />
+        <CheckBox
+            android:id="@+id/cbRememberUserSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_user" />
+
+        <CheckBox
+            android:id="@+id/cbRememberPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_password" />
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnHaveAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:backgroundTint="@color/app_bg"
         android:text="@string/already_have_acc"
-        android:textColor="@color/app_fg"
-        app:layout_constraintBottom_toTopOf="@id/llBottomButtonsSignUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbRememberPasswordSignUp" />
+        android:textColor="@color/app_fg" />
 
     <LinearLayout
         android:id="@+id/llBottomButtonsSignUp"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnExitSignUp"
@@ -162,4 +136,4 @@
             android:textColor="@color/app_title_fg" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

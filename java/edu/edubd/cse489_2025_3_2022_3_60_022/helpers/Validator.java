@@ -109,34 +109,6 @@ public abstract class Validator {
             event.callback("Password is length must be under 8 to 32 char long");
             return false;
         }
-        class ReErr {
-            final String pattern;
-            final String errInfo;
-            public  ReErr(String pattern, String errInfo) {
-                this.pattern = pattern;
-                this.errInfo = errInfo;
-            }
-            public boolean matches(@NotNull String str) {
-                return str.matches(pattern);
-            }
-            @NotNull
-            public String getErrInfo() {
-                return errInfo;
-            }
-        };
-        ReErr[] reErrs = {
-            new ReErr("(?=.*[A-Z])", "Password must contain at least one uppercase letter"),
-            new ReErr("(?=.*[a-z])", "Password must contain at least one lowercase letter"),
-            new ReErr("(?=.*\\d)", "Password must contain at least one number"),
-            new ReErr("(?=.*[!@#$%^&*(),.?\":{}|<>])", "Password must contain at least one special character"),
-        };
-
-        for (ReErr i : reErrs) {
-            if (!i.matches(password)) {
-                event.callback(i.getErrInfo());
-                return false;
-            }
-        }
 
         return true;
     }

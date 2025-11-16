@@ -31,13 +31,15 @@ public class MainActivity extends AppCompatActivity {
         attendances = new ArrayList<>();
         customAdapter = new CustomAdapter(this, attendances);
         lvStudents.setAdapter(customAdapter);
+        db = new KeyValueDB(this);
 
-        findViewById(R.id.btnExit).setOnClickListener((v) -> finish());
-
-        findViewById(R.id.btnAddStudent).setOnClickListener((v) ->
-                startActivity(new Intent(MainActivity.this, StudentProfileActivity.class))
+        findViewById(R.id.btnExit).setOnClickListener(
+                (v) -> finish()
         );
 
+        findViewById(R.id.btnAddStudent).setOnClickListener(
+                (v) -> startActivity(new Intent(MainActivity.this, StudentProfileActivity.class))
+        );
     }
 
     @Override
@@ -49,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadStudentsFromLocalDB() {
         attendances.clear();
-        String q = "SELECT * FROM key_value_pairs WHERE 'STD_%'";
-        Cursor c = db.execute(q);
+        String q = String.format(
+                "SELECT * FROM %s WHERE %s LIKE ?",
+                db.TABLE_KEY_VALUE,
+                db.KEY
+        );
+        Cursor c = db.execute(q, new String[]{"STD_%"});
         if (c == null) {
             db.close();
         }
@@ -66,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             attendances.add(att);
         }
         customAdapter.notifyDataSetChanged();
+        c.close();
         db.close();
     }
 }

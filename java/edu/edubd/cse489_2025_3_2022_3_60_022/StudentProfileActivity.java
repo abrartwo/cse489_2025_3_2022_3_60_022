@@ -1,7 +1,6 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,21 +27,8 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         stdDb = new KeyValueDB(this);
 
-        findViewById(R.id.btnCancel).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }
-        );
-
-        findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveProfile();
-            }
-        });
+        findViewById(R.id.btnCancel).setOnClickListener(v -> finish());
+        findViewById(R.id.btnSave).setOnClickListener(v -> saveProfile());
     }
 
     private void saveProfile() {
