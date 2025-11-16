@@ -76,7 +76,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/app_bg"
-        android:text="@string/already_have_acc"
+        android:text="@string/dont_have_acc"
         android:textColor="@color/app_fg" />
 
     <LinearLayout
