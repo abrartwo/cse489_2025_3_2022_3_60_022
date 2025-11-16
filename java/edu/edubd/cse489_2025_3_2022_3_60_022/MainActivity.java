@@ -13,9 +13,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etCourseCode, etDate;
-    private ListView lvStudents;
 
-    private List<Attendence> attendances;
+    private List<Attendance> attendances;
     private CustomAdapter customAdapter;
     private KeyValueDB db;
 
@@ -26,26 +25,23 @@ public class MainActivity extends AppCompatActivity {
 
         etCourseCode = findViewById(R.id.etCourseCode);
         etDate = findViewById(R.id.etDate);
-        lvStudents = findViewById(R.id.lvStudents);
 
         attendances = new ArrayList<>();
         customAdapter = new CustomAdapter(this, attendances);
-        lvStudents.setAdapter(customAdapter);
+        ((ListView)findViewById(R.id.lvStudents)).setAdapter(customAdapter);
         db = new KeyValueDB(this);
 
         findViewById(R.id.btnExit).setOnClickListener(
                 (v) -> finish()
         );
-
         findViewById(R.id.btnAddStudent).setOnClickListener(
                 (v) -> startActivity(new Intent(MainActivity.this, StudentProfileActivity.class))
         );
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
+    protected void onResume() {
+        super.onResume();
         loadStudentsFromLocalDB();
     }
 
@@ -59,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor c = db.execute(q, new String[]{"STD_%"});
         if (c == null) {
             db.close();
+            return;
         }
         while (c.moveToNext()) {
             String key = c.getString(0);
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             String sid = stdInfo[0];
             String name = stdInfo[1];
 
-            Attendence att = new Attendence(sid, name, false);
+            Attendance att = new Attendance(sid, name, false);
             attendances.add(att);
         }
         customAdapter.notifyDataSetChanged();

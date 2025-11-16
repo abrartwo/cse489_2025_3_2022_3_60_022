@@ -1,7 +1,6 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -43,12 +42,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        findViewById(R.id.btnHaveAcc).setOnClickListener((v) -> moveToMainActivity());
+        findViewById(R.id.btnHaveAcc).setOnClickListener((v) -> moveSignUpActivity());
         findViewById(R.id.btnExitLogin).setOnClickListener((v) -> finish());
         findViewById(R.id.btnLoginGo).setOnClickListener((v) -> processLogin());
     }
 
-    private void moveToMainActivity() {
+    private void moveSignUpActivity() {
         startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
         finishAffinity();
     }
@@ -70,10 +69,13 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         acm.newEditor()
-                .updateUserId(userId)
-                .updatePassword(password)
-                .updateRememberUser(isRememberUser)
-                .updateRememberPassword(isRememberPassword).apply();
+            .updateUserId(userId)
+            .updatePassword(password)
+            .updateRememberUser(isRememberUser)
+            .updateRememberPassword(isRememberPassword)
+            .apply();
+
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finishAffinity();
     }
 }

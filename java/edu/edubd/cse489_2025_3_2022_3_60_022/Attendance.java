@@ -1,11 +1,11 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
-public class Attendence {
+public class Attendance {
     private String sid;
     private String name;
     private boolean isPresent;
 
-    public Attendence(String sid, String name, boolean isPresent) {
+    public Attendance(String sid, String name, boolean isPresent) {
         this.setSid(sid);
         this.setName(name);
         this.setPresent(isPresent);

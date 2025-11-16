@@ -8,16 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class CustomAdapter extends ArrayAdapter<Attendence> {
+public class CustomAdapter extends ArrayAdapter<Attendance> {
     Context context;
-    List<Attendence> arrayList;
+    List<Attendance> arrayList;
     LayoutInflater inflater;
 
-    public CustomAdapter(Context context, List<Attendence> arrayList) {
+    public CustomAdapter(Context context, List<Attendance> arrayList) {
         super(context, R.layout.row_attendence, arrayList);
         this.context = context;
         this.arrayList = arrayList;
@@ -36,7 +35,7 @@ public class CustomAdapter extends ArrayAdapter<Attendence> {
         RadioButton rbAbsent = rowView.findViewById(R.id.rbAMain);
         TextView tvStats = rowView.findViewById(R.id.tvStatMain);
 
-        Attendence att = this.arrayList.get(position);
+        Attendance att = this.arrayList.get(position);
         tvSid.setText(att.getSid());
         tvName.setText(att.getName());
         rbPresent.setChecked(att.isPresent());

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 public class KeyValueDB extends SQLiteOpenHelper {
 
@@ -19,16 +22,15 @@ public class KeyValueDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("DB@OnCreate");
         createKeyValueTable(db);
     }
 
     private void createKeyValueTable(SQLiteDatabase db) {
         try {
             db.execSQL("create table " + TABLE_KEY_VALUE + " (" + KEY
-                    + " TEXT PRIMARY KEY, " + VALUE + " TEXT)");
+                + " TEXT PRIMARY KEY, " + VALUE + " TEXT)");
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("DB_ERR", e.toString());
         }
     }
 
@@ -38,8 +40,9 @@ public class KeyValueDB extends SQLiteOpenHelper {
         // SQL statements to change the database schema
     }
 
-    private void handleError(SQLiteDatabase db, Exception e) {
-        String errorMsg = e.getMessage().toString();
+    private void handleError(SQLiteDatabase db, @NonNull Exception e) {
+        String errorMsg = e.getMessage();
+        if (errorMsg == null) return;
         if (errorMsg.contains("no such table")) {
             if (errorMsg.contains(TABLE_KEY_VALUE)) {
                 createKeyValueTable(db);
@@ -53,7 +56,7 @@ public class KeyValueDB extends SQLiteOpenHelper {
         try {
             res = db.rawQuery(query, args);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("DB_ERR", e.toString());
         }
         return res;
     }
@@ -67,7 +70,7 @@ public class KeyValueDB extends SQLiteOpenHelper {
             long result = db.insert(TABLE_KEY_VALUE, null, cv);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("DB_ERR", e.toString());
         }
         return false;
     }
@@ -85,10 +88,10 @@ public class KeyValueDB extends SQLiteOpenHelper {
         cv.put(VALUE, value);
         try {
             int nr = db.update(TABLE_KEY_VALUE, cv, KEY + "=?",
-                    new String[]{key});
+                new String[]{key});
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("DB_ERR", e.toString());
         }
         return false;
     }
@@ -99,7 +102,7 @@ public class KeyValueDB extends SQLiteOpenHelper {
         try {
             isDeleted = db.delete(TABLE_KEY_VALUE, KEY + " = ?", new String[]{key});
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("DB_ERR", e.toString());
         }
         return isDeleted;
     }
@@ -109,27 +112,27 @@ public class KeyValueDB extends SQLiteOpenHelper {
         Cursor res;
         try {
             res = db.rawQuery("SELECT * FROM " + TABLE_KEY_VALUE + " WHERE "
-                    + KEY + "='" + key + "'", null);
+                + KEY + "='" + key + "'", null);
         } catch (Exception e) {
             handleError(db, e);
             res = db.rawQuery("SELECT * FROM " + TABLE_KEY_VALUE + " WHERE "
-                    + KEY + "='" + key + "'", null);
+                + KEY + "='" + key + "'", null);
         }
+        String ret = null;
         if (res.getCount() > 0) {
             res.moveToNext();
-            return res.getString(1);
+            ret = res.getString(1);
         }
-        return null;
+        res.close();
+        return ret;
     }
 
     //
     public void deleteQuery(String query) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res;
         try {
             db.execSQL(query);
         } catch (Exception e) {
-            // e.printStackTrace();
             handleError(db, e);
             db.execSQL(query);
         }
