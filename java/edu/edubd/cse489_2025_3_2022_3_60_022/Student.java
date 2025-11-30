@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.Validator;
-
 
 public class Student implements Serializable {
     private final String id;
@@ -18,6 +16,15 @@ public class Student implements Serializable {
         this.name = b.name;
         this.email = b.email;
         this.phoneNumber = b.phoneNumber;
+    }
+
+    public static Student parse(String value) {
+        String[] info = value.split(";");
+        return new StudentBuilder()
+                .addId(info[0])
+                .addName(info[1])
+                .addEmail(info[2])
+                .addPhone(info[3]).build();
     }
 
     @NonNull

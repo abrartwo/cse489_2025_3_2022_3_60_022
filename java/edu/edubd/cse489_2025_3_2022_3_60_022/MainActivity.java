@@ -1,8 +1,12 @@
 package edu.edubd.cse489_2025_3_2022_3_60_022;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -13,6 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etCourseCode, etDate;
+    private ListView lvStudents;
 
     private List<Attendance> attendances;
     private CustomAdapter customAdapter;
@@ -25,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         etCourseCode = findViewById(R.id.etCourseCode);
         etDate = findViewById(R.id.etDate);
+        lvStudents = findViewById(R.id.lvStudents);
 
         attendances = new ArrayList<>();
         customAdapter = new CustomAdapter(this, attendances);
-        ((ListView)findViewById(R.id.lvStudents)).setAdapter(customAdapter);
+        lvStudents.setAdapter(customAdapter);
         db = new KeyValueDB(this);
 
         findViewById(R.id.btnExit).setOnClickListener(
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 (v) -> startActivity(new Intent(MainActivity.this, StudentProfileActivity.class))
         );
     }
+
+
 
     @Override
     protected void onResume() {
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 db.TABLE_KEY_VALUE,
                 db.KEY
         );
-        Cursor c = db.execute(q, new String[]{"STD_%"});
+        Cursor c = db.execute(q, new String[]{"std_%"});
         if (c == null) {
             db.close();
             return;

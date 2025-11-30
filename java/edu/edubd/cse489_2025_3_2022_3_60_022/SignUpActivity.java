@@ -8,9 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.AccountCredentialManager;
-import edu.edubd.cse489_2025_3_2022_3_60_022.helpers.Validator;
-
 public class SignUpActivity extends AppCompatActivity {
     EditText etUserIdSignUp, etEmailSignUp, etPasswordSignUp, etRetypePasswordSignUp;
     CheckBox cbRememberUserSignUp, cbRememberPasswordSignUp;
