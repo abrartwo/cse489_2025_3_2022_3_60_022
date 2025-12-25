@@ -14,6 +14,7 @@ import java.util.List;
 public class RemoteAccess {
 
     public String makeHttpRequest(String url, String method, List<NameValuePair> params) {
+
         HttpURLConnection http = null;
         InputStream is = null;
         String data = "";
@@ -22,16 +23,20 @@ public class RemoteAccess {
             // check for request method
             if (method.equals("POST")) {
                 //httpClient = new DefaultHttpClient();
-                if (params != null) {
+                if(params != null) {
                     String paramString = URLEncodedUtils.format(params, "utf-8");
                     url += "?" + paramString;
                 }
             }
-            System.out.println("@RemoteAccess-" + ": " + url);
+
+            System.out.println("@RemoteAccess-"+": "+ url);
             URL urlc = new URL(url);
+            //System.out.println("Here 2");
             http = (HttpURLConnection) urlc.openConnection();
             //System.out.println("Here 3");
             http.connect();
+
+            //Byte stream wise data
             is = http.getInputStream();
             //System.out.println("Here 4");
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
@@ -48,7 +53,6 @@ public class RemoteAccess {
         try {
             http.disconnect();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return null;
     }

@@ -77,7 +77,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             return;
         }
 
-        String[] keys = {"action", "sid", "sem", "key", "value"};
+        String[] keys = {"action", "sid", "semester", "key", "value"};
         String[] values = {"backup", "2022-3-60-022", "2025-3", key, value};
         httpRequest(keys, values);
         finish();
@@ -94,8 +94,8 @@ public class StudentProfileActivity extends AppCompatActivity {
                 }
                 String url = "https://www.muthosoft.com/univ/cse489/key_value.php";
                 try {
-                    RemoteAccess ar = new RemoteAccess();
-                    String data = ar.makeHttpRequest(url, "POST", params);
+                    RemoteAccess ra = new RemoteAccess();
+                    String data = ra.makeHttpRequest(url, "POST", params);
                     return data;
                 } catch (Exception e) {
                     e.printStackTrace();
